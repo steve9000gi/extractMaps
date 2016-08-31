@@ -12,8 +12,9 @@ for ((i=0; i<$nIds; i++)); do
   em=($(psql -U ssm -h localhost -d ssm -t -c "select email from ssm.maps, \
         ssm.users where maps.owner = users.id and maps.id = $id;"))
   fname="$em-$id$ext"
-  echo "id $i: $id; fname: $fname"
-  psql -U ssm -h localhost -d ssm -t -o "$fname" -c "select document from \
+  fnclean="$(echo -e "${fname}" | tr -d '[[:space:]]')" # Remove all whitespace
+  echo "id $i: $id; fnclean: $fnclean"
+  psql -U ssm -h localhost -d ssm -t -o "$fnclean" -c "select document from \
       ssm.maps where id='$id'"
 done
 
