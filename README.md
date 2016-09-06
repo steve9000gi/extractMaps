@@ -5,30 +5,30 @@ The Bash shell script extractMaps.sh pulls each System Support Map .json file
 out from the Postgresql database on the server and writes it to a .json file.
 Each filename is:
 
-<state>_<affilsa><affilfm><affilhp><affilep><affilss><affillos>_<em><id>.json
+\<state>_\<affilsa>\<affilfm>\<affilhp>\<affilep>\<affilss>\<affillos>_\<em>\<id>.json
 
-where the generic names inside the <brackets> have the following values (all
-except <id> are what the user entered on the System Support Map Wizard's
+where the generic names inside the \<brackets> have the following values (all
+except \<id> are what the user entered on the System Support Map Wizard's
 "Create a New Account" page):
 
-<state> "State/Territory/Country" 
+\<state> "State/Territory/Country" 
 
-<affilsa> "Self Advocate" affiliation: single character 't' if user selected
+\<affilsa> "Self Advocate" affiliation: single character 't' if user selected
 this check box, 'f' if blank
 
-<affilfm> "Family member/Representative" affiliation: 't' or 'f' as above
+\<affilfm> "Family member/Representative" affiliation: 't' or 'f' as above
 
-<affilhp> "Health Provider or Professional" affiliation: 't' or 'f'
+\<affilhp> "Health Provider or Professional" affiliation: 't' or 'f'
 
-<affilep> "Education Provider or Professional" affiliation: 't' or 'f'
+\<affilep> "Education Provider or Professional" affiliation: 't' or 'f'
 
-<affilss> "State Maternal Child Health Agency Staff" affiliation: 't' or 'f'
+\<affilss> "State Maternal Child Health Agency Staff" affiliation: 't' or 'f'
 
-<affillos> "Community-Based or Local Organization Staff" affiliation: 't' or 'f'
+\<affillos> "Community-Based or Local Organization Staff" affiliation: 't' or 'f'
 
-<em> "Email address" up to but not including the '@' sign
+\<em> "Email address" up to but not including the '@' sign
 
-<id> The unique integer identifier for this specific map.
+\<id> The unique integer identifier for this specific map.
 
 Example: 
 
