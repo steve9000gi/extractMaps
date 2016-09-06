@@ -32,16 +32,16 @@ this check box, 'f' if blank
 
 Example: 
 
-State/Territory/Country: "North Dakota"
-Affiliations:
-  "Self Advocate": not selected
-  "Family member/Representative": not selected
-  "Health Provider or Professional": selected
-  "Education Provider or Professional": selected
-  "State Maternal Child Health Agency Staff": selected
-  "Community-Based or Local Organization Staff": not selected
-Email address: "bob_johnson.77@interop.org"
-Map id: 654
+* State/Territory/Country: "North Dakota"
+* Affiliations:
+*  "Self Advocate": not selected
+*  "Family member/Representative": not selected
+*  "Health Provider or Professional": selected
+*  "Education Provider or Professional": selected
+*  "State Maternal Child Health Agency Staff": selected
+*  "Community-Based or Local Organization Staff": not selected
+* Email address: "bob_johnson.77@interop.org"
+* Map id: 654
 
 filename: NorthDakota_fftttf_bob_johnson.77_654.json
 
