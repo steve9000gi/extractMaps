@@ -4,32 +4,25 @@
 
 ext=".json"
 uscore="_"
-idArray=($(psql -U ssm -h localhost -d ssm -t -c "select id from ssm.maps;"))
-nIds=${#idArray[@]}
+ids=($(psql -U ssm -h localhost -d ssm -t -c "select id from ssm.maps;"))
+nIds=${#ids[@]}
 IFS=$'@'
 
 for ((i=0; i<$nIds; i++)); do
-  id="${idArray[$i]}"
+  id="${ids[$i]}"
   em=($(psql -U ssm -h localhost -d ssm -t -c "select email from ssm.maps,     \
     ssm.users where maps.owner = users.id and maps.id = $id;"))
   state=($(psql -U ssm -h localhost -d ssm -t -c "select state from ssm.maps,  \
     ssm.users where maps.owner = users.id and maps.id = $id;"))
-  sa=($(psql -U ssm -h localhost -d ssm -t -c "select affil_self_advocate from \
-    ssm.maps, ssm.users where maps.owner = users.id and maps.id = $id;"))
-  fm=($(psql -U ssm -h localhost -d ssm -t -c "select affil_family_member from \
-    ssm.maps, ssm.users where maps.owner = users.id and maps.id = $id;"))
-  hp=($(psql -U ssm -h localhost -d ssm -t -c "select affil_health_provider    \
-    from ssm.maps, ssm.users where maps.owner = users.id and maps.id = $id;"))
-  ep=($(psql -U ssm -h localhost -d ssm -t -c "select affil_education_provider \
-    from ssm.maps, ssm.users where maps.owner = users.id and maps.id = $id;"))
-  ss=($(psql -U ssm -h localhost -d ssm -t -c "select affil_smcha_staff from   \
-    ssm.maps, ssm.users where maps.owner = users.id and maps.id = $id;"))
-  los=($(psql -U ssm -h localhost -d ssm -t -c "select affil_local_org_staff   \
-    from ssm.maps, ssm.users where maps.owner = users.id and maps.id = $id;"))
-  fname="$state$uscore$sa$fm$hp$ep$ss$los$uscore$em$uscore$id$ext"
+  affils=($(psql -U ssm -h localhost -d ssm -t -c "select affil_self_advocate, \
+    affil_family_member, affil_health_provider, affil_education_provider,      \
+    affil_smcha_staff, affil_local_org_staff from ssm.maps, ssm.users where    \
+    maps.owner = users.id and maps.id = $id;"))
+  affilsclean="$(echo -e "${affils}" | tr -d '|')"
+  fname="$state$uscore$affilsclean$uscore$em$uscore$id$ext"
   fnclean="$(echo -e "${fname}" | tr -d '[[:space:]]')" # Remove all whitespace
   echo "$i: $id; $fnclean"
-  psql -U ssm -h localhost -d ssm -t -o "$fnclean" -c "select document from \
+  psql -U ssm -h localhost -d ssm -t -o "$fnclean" -c "select document from    \
       ssm.maps where id='$id'"
 done
 
