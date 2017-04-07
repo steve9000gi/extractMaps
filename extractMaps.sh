@@ -20,7 +20,8 @@ for ((i=0; i<$nIds; i++)); do
     maps.owner = users.id and maps.id = $id;"))
   affilsclean="$(echo -e "${affils}" | tr -d '|')"
   fname="$state$uscore$affilsclean$uscore$em$uscore$id$ext"
-  fnclean="$(echo -e "${fname}" | tr -d '[[:space:]]')" # Remove all whitespace
+  fncleaner="${fname//// }" # Replace forward slashes with spaces
+  fnclean="$(echo -e "${fncleaner}" | tr -d '[[:space:]]')" # rm all whitespace
   echo "$i: $id; $fnclean"
   psql -U ssm -h localhost -d ssm -t -o "$fnclean" -c "select document from    \
       ssm.maps where id='$id'"
